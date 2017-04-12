@@ -1,0 +1,30 @@
+.route--active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.container {
+  width: 100%;
+  background-color: black;
+  height: 50px; 
+}
+
+#logo {
+  font-size: 2em;
+  font-weight: 600;
+  color: white;
+  float: left;
+  letter-spacing: 0.075em;
+}
+.nav {
+  display: block;
+  float: right!important;
+  font-family: Poppins,Arial sans-serif;
+  font-size: 20px;
+  line-height: 1.42857143;
+  color: black;
+  margin: 10px;
+}
+.nav-item {
+  color: white;
+  margin: 0 10px;
+}
