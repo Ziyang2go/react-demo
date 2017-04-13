@@ -6,7 +6,7 @@ import './CoreLayout.scss'
 import '../../styles/core.scss'
 
 export const CoreLayout = ({ children }) => (
-  <div className='container text-center'>
+  <div>
     <Header />
     <div className='core-layout__viewport' >
       {children}
