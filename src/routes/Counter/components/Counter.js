@@ -1,40 +1,43 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import sushi1 from '../../Home/assets/sushi1.jpg';
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header, Item,  Label} from 'semantic-ui-react'
 
 const visible = Window.innerWidth > 1000 || screen.width > 1000;
-class Counter extends Component {
-  state = { visible: visible };
+
+export class Counter extends React.Component {
+  state = { visible: visible }
 
   renderItems = function(menu) {
+    var self = this;
+    var menu = [{id:0},{id:1},{id:2},{id:3},{id:4}]
+    const { counter } = this.props.counter;
     var items = [];
-    for(var i = 0;i <15; i++) {
+    menu.forEach(function(m){
       items.push((
       <Item>
-        <Item.Image size='small' src={sushi1} />
+        <Item.Image size='small' src={ sushi1 } />
 
         <Item.Content>
-          <Item.Header as='a'>{'Item' + i}</Item.Header>
+          <Item.Header as='a'>{'Item' + m.id}</Item.Header>
           <div style={{float:'right'}}>
             <Button.Group>
-              <Button icon='plus' onClick={this.addItem} />
-              <Label size='medium'>0</Label>
-              <Button icon='minus' onClick={this.removeItem} />
+              <Button icon='plus' onClick={(ev)=>self.props.increment(m.id)} />
+              <Label size='medium'>{counter[m.id]}</Label>
+              <Button icon='minus' onClick={(ev)=>self.props.decrement(m.id)} />
             </Button.Group>
           </div>
-          <Item.Meta>this is {'item' +i } description</Item.Meta>
+          <Item.Meta>this is {'item' +m.id } description</Item.Meta>
           <Item.Extra>$7.99</Item.Extra>
         </Item.Content>
       </Item>
       ));
-    }
+    });
     return items;
   }
 
   render() {
     const { visible, menu } = this.state;
-    const items = this.renderItems(menu);
     return (
       <div>
         <Sidebar.Pushable as={Segment}>
@@ -56,7 +59,7 @@ class Counter extends Component {
             <Segment>
               <div>
                 <Item.Group>
-                  { items }
+                  { this.renderItems(menu) }
                 </Item.Group>
               </div>
             </Segment>
@@ -67,13 +70,11 @@ class Counter extends Component {
   }
 }
 
-/*export default SidebarLeftPush
-)
 
 Counter.propTypes = {
-  counter     : PropTypes.number.isRequired,
-  doubleAsync : PropTypes.func.isRequired,
+  counter: PropTypes.object.isRequired,
+  decrement : PropTypes.func.isRequired,
   increment   : PropTypes.func.isRequired
 }
-*/
+
 export default Counter
